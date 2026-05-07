@@ -12,5 +12,5 @@ if (!$koneksi) {
     die("Koneksi gagal: " . mysqli_connect_error());
 }
 
-echo "Koneksi berhasil"; 
+// echo "Koneksi ke database berhasil"; 
 ?>

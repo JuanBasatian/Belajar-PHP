@@ -33,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Form Masuk</title>
+    <title>Halaman Masuk</title>
 </head>
 <body>
-    <h1>Form Login</h1>
+    <h1>Halaman Login</h1> 
     
     <?php if (isset($pesan)): ?>
         <p style="color: <?php echo $warna_pesan; ?>;"><?php echo $pesan; ?></p>

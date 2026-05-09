@@ -2,20 +2,20 @@
 session_start();
 include 'koneksi.php';
 
-// Cek apakah sudah login
+// Mengecek apakah sudah login
 if (!isset($_SESSION['status_masuk']) || $_SESSION['status_masuk'] !== true) {
     header("Location: login.php");
     exit();
 }
 
-// Ambil id user dari session
+// Mengambil id user dari session
 $nama_pengguna = $_SESSION['nama_pengguna'];
 $ambil_user = "SELECT id FROM users WHERE username = '$nama_pengguna'";
 $hasil_user = mysqli_query($koneksi, $ambil_user);
 $data_user = mysqli_fetch_assoc($hasil_user);
 $user_id = $data_user['id'];
 
-// Proses Tambah Tugas
+// Proses unutk tambah Tugas
 if (isset($_POST['tambah'])) {
     $nama_tugas = $_POST['nama_tugas'];
     if (!empty($nama_tugas)) {
@@ -26,7 +26,7 @@ if (isset($_POST['tambah'])) {
     exit();
 }
 
-// Proses Selesai (ubah status menjadi selesai)
+// Proses Selesai (dengan kondisi mengubah status menjadi selesai seperti dicoret)
 if (isset($_GET['selesai'])) {
     $id_tugas = $_GET['selesai'];
     $query_selesai = "UPDATE tugas SET status = 'selesai' WHERE id = '$id_tugas' AND user_id = '$user_id'";
@@ -35,7 +35,7 @@ if (isset($_GET['selesai'])) {
     exit();
 }
 
-// Proses Hapus Tugas
+// Proses menghapus Tugas
 if (isset($_GET['hapus'])) {
     $id_tugas = $_GET['hapus'];
     $query_hapus = "DELETE FROM tugas WHERE id = '$id_tugas' AND user_id = '$user_id'";
@@ -44,7 +44,7 @@ if (isset($_GET['hapus'])) {
     exit();
 }
 
-// Ambil semua tugas user
+// Mengambil semua tugas user
 $query_tampil = "SELECT * FROM tugas WHERE user_id = '$user_id' ORDER BY tanggal_dibuat DESC";
 $hasil_tampil = mysqli_query($koneksi, $query_tampil);
 ?>
@@ -53,6 +53,7 @@ $hasil_tampil = mysqli_query($koneksi, $query_tampil);
 <html>
 <head>
     <title>Halaman Beranda</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -153,14 +154,54 @@ $hasil_tampil = mysqli_query($koneksi, $query_tampil);
             color: #999;
             padding: 30px;
         }
+        
+        .profile {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 8px 15px;
+            border-radius: 50px;
+            z-index: 100;
+        }
+        
+        .profile-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-name {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    
+    <div class="profile">
+        <div class="profile-img">
+            <img src="Gambar.jpeg" alt="Profile">
+        </div>
+        <span class="profile-name">Juan Bastian Mambraku / 245314030</span>
+    </div>
+
     <div class="container">
         <h1>Halaman Beranda</h1>
         <p style="text-align: center;">Halo, <strong><?php echo $nama_pengguna; ?></strong></p>
         
-        <!-- Form Tambah Tugas -->
+        <!-- Halaman untuk Tambah Tugas -->
         <form method="POST" class="form-tambah">
             <input type="text" name="nama_tugas" placeholder="<Teks to do>" required>
             <button type="submit" name="tambah">Tambah</button>
@@ -187,7 +228,7 @@ $hasil_tampil = mysqli_query($koneksi, $query_tampil);
             </div>
         <?php endif; ?>
         
-        <a href="keluar.php" class="logout">🚪 Keluar</a>
+        <a href="keluar.php" class="logout">Keluar</a>
     </div>
 </body>
 </html>

@@ -5,10 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama_pengguna = $_POST['username'];
     $kata_sandi = $_POST['password'];
     
-    // Kata sandi diacak/dikodekan (hashed)
     $kata_sandi_acak = password_hash($kata_sandi, PASSWORD_DEFAULT);
     
-    // Mengecek apakah nama pengguna sudah terdaftar
     $cek_data = "SELECT * FROM users WHERE username = '$nama_pengguna'";
     $hasil_cek = mysqli_query($koneksi, $cek_data);
     
@@ -16,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pesan = "Akun sudah terdaftar!";
         $warna_pesan = "merah";
     } else {
-        // Simpan ke database
         $simpan_data = "INSERT INTO users (username, password) VALUES ('$nama_pengguna', '$kata_sandi_acak')";
         
         if (mysqli_query($koneksi, $simpan_data)) {
@@ -34,12 +31,62 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html>
 <head>
     <title>Halaman Registrasi</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        .profile {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 8px 15px;
+            border-radius: 50px;
+            z-index: 100;
+        }
+        
+        .profile-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-name {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .pesan {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+   
+    <div class="profile">
+        <div class="profile-img">
+            <img src="Gambar.jpeg" alt="Profile">
+        </div>
+        <span class="profile-name">Juan Bastian Mambraku / 245314030</span>
+    </div>
+    
     <h1>Halaman Registrasi</h1>
     
     <?php if (isset($pesan)): ?>
-        <p style="color: <?php echo $warna_pesan; ?>;"><?php echo $pesan; ?></p>
+        <p class="pesan" style="color: <?php echo ($warna_pesan == 'merah') ? 'red' : 'green'; ?>;"><?php echo $pesan; ?></p>
     <?php endif; ?>
     
     <form method="POST" action="">
@@ -53,12 +100,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td><input type="password" name="password" required></td>
             </tr>
             <tr>
-                <td></td>
-                <td><input type="submit" value="Daftar"></td>
+                <td colspan="2" style="text-align: center;">
+                    <input type="submit" value="Daftar">
+                </td>
             </tr>
         </table>
     </form>
     
-    <p>Sudah punya akun? <a href="login.php">Masuk disini</a></p>
+    <div class="link-login">
+        Sudah punya akun? <a href="login.php">Masuk disini</a>
+    </div>
 </body>
 </html>

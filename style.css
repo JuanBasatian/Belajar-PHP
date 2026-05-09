@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 400px;
+    margin: 305px auto;
+    background-image: url('https://wallpapercave.com/wp/wp3416319.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+h1 {
+    text-align: center;
+}
+form {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+table {
+    margin: 0 auto;
+}
+td {
+    padding: 10px;
+}
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+}
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #004499;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #0066cc;
+}
+
+.link-login {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Pesan ke tengah */
+.pesan {
+    text-align: center;
+}

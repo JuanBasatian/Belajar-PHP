@@ -1,16 +1,14 @@
 <?php
 $host = "localhost";
-$username = "root"; // username default XAMPP
-$password = ""; // password default XAMPP (kosong)
+$username = "root"; 
+$password = ""; 
 $database = "user_system";
 
-// Membuat koneksi
+// Membuat koneksi ke database saya, saya menggunakan database default dari bawaan dengan username root
 $koneksi = mysqli_connect($host, $username, $password, $database);
 
-// Cek koneksi
+// Pengecekan koneksi
 if (!$koneksi) {
     die("Koneksi gagal: " . mysqli_connect_error());
 }
-
-// echo "Koneksi ke database berhasil"; 
 ?>
